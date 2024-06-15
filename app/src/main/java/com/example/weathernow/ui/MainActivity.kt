@@ -6,6 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.navigation.compose.rememberNavController
 import com.example.weathernow.ui.navigation.Navigation
@@ -19,7 +23,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             WeatherNowTheme {
-                Navigation(navController = navController)
+                Box(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+                    Navigation(navController = navController)
+                }
             }
         }
     }

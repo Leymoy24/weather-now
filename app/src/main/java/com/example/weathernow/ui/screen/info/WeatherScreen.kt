@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 @Composable
-fun InfoScreen(navController: NavHostController) {
+fun WeatherScreen(navController: NavHostController) {
     Text("Info Screen")
 }
