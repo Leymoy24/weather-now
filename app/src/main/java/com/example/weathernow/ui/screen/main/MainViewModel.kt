@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.weathernow.api.ApiResult
 import com.example.weathernow.data.model.CityModel
 import com.example.weathernow.data.repository.MainRepository
-import com.example.weathernow.ui.screen.weather.WeatherScreenUiState
+import com.example.weathernow.ui.ScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,28 +17,33 @@ class MainViewModel @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
 
-    private val _screenUiState = MutableStateFlow<WeatherScreenUiState>(WeatherScreenUiState.Initial)
-    val screenUiState: StateFlow<WeatherScreenUiState> = _screenUiState
+    private val _screenUiState = MutableStateFlow<ScreenUiState>(ScreenUiState.Initial)
+    val screenUiState: StateFlow<ScreenUiState> = _screenUiState
 
-    private val _listOfCities = MutableStateFlow<List<CityModel>>(listOf(CityModel(id = "0", city = "Loading..", longitude = "31.43", latitude = "43.43")))
+    private val _listOfCities = MutableStateFlow<List<CityModel>>(listOf())
+
     val listOfCities: StateFlow<List<CityModel>> = _listOfCities
 
     init { getAllCities() }
 
-    fun getAllCities(){
+    fun getAllCities() {
         viewModelScope.launch {
-            _screenUiState.value = WeatherScreenUiState.Loading
+            _screenUiState.value = ScreenUiState.Loading
 
             when (val result = repository.getCities()) {
                 is ApiResult.Success -> {
-                    _screenUiState.value = WeatherScreenUiState.Success(result.data)
+                    _screenUiState.value = ScreenUiState.Success(result.data)
                     _listOfCities.value = result.data.sortedBy { it.city }
                 }
 
                 is ApiResult.Error -> {
-                    _screenUiState.value = WeatherScreenUiState.Error(result.error)
+                    _screenUiState.value = ScreenUiState.Error(result.error)
                 }
             }
         }
+    }
+
+    fun setCurrentCityModel(cityModel: CityModel){
+        repository.setCurrentCity(cityModel = cityModel)
     }
 }

@@ -1,5 +1,7 @@
 package com.example.weathernow.api
 
+import com.example.example.WeatherSerializable
+import com.example.weathernow.BuildConfig
 import com.example.weathernow.api.serializable.CitySerializable
 import com.example.weathernow.data.model.CityModel
 import io.ktor.client.HttpClient
@@ -28,13 +30,14 @@ class ApiServiceImpl(
         }
     }
 
-    override suspend fun getWeatherByCity(cityModel: CityModel): ApiResult<Float> {
+    override suspend fun getWeatherByCity(cityModel: CityModel): ApiResult<WeatherSerializable> {
         return try {
             val response = client.get(ApiRoutes.BASE_URL_WEATHER + ApiRoutes.WEATHER_v2_5) {
                 url {
                     parameters.append("lat", cityModel.latitude)
                     parameters.append("lon", cityModel.longitude)
-                    parameters.append("appid", "547de033f23db97460986b194b8b5a45")
+                    parameters.append("appid", BuildConfig.API_KEY_OPEN_WEATHER)
+                    parameters.append("units", "metric")
                 }
             }
 

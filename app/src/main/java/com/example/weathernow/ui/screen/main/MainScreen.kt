@@ -33,14 +33,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weathernow.R
 import com.example.weathernow.data.model.CityModel
-import com.example.weathernow.ui.screen.weather.WeatherScreenUiState
+import com.example.weathernow.ui.ScreenUiState
 
 @Composable
 fun MainScreen(navigateToInfoScreen: () -> Unit, viewModel: MainViewModel = hiltViewModel()) {
@@ -49,7 +48,7 @@ fun MainScreen(navigateToInfoScreen: () -> Unit, viewModel: MainViewModel = hilt
     val uiState by viewModel.screenUiState.collectAsState()
 
     when (uiState) {
-        is WeatherScreenUiState.Loading -> {
+        is ScreenUiState.Loading -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -58,7 +57,7 @@ fun MainScreen(navigateToInfoScreen: () -> Unit, viewModel: MainViewModel = hilt
             }
         }
 
-        is WeatherScreenUiState.Error -> {
+        is ScreenUiState.Error -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
@@ -79,7 +78,7 @@ fun MainScreen(navigateToInfoScreen: () -> Unit, viewModel: MainViewModel = hilt
                     onClick = { viewModel.getAllCities() }
                 ) {
                     Text(
-                        text = stringResource(R.string.save),
+                        text = stringResource(R.string.refresh),
                         fontWeight = FontWeight.Medium,
                         fontSize = 14.sp,
                         lineHeight = 20.sp,
@@ -124,7 +123,8 @@ fun MainScreen(navigateToInfoScreen: () -> Unit, viewModel: MainViewModel = hilt
                             city.city,
                             showCharHeader = startIndexes.contains(index) && listState.firstVisibleItemIndex != index,
                             commonModifier,
-                            navigateToInfoScreen = navigateToInfoScreen
+                            navigateToInfoScreen = navigateToInfoScreen,
+                            setUpCurrentCityModel = { viewModel.setCurrentCityModel(city) }
                         )
                     }
                 }
@@ -168,7 +168,8 @@ fun NameItem(
     name: String,
     showCharHeader: Boolean,
     modifier: Modifier,
-    navigateToInfoScreen: () -> Unit
+    navigateToInfoScreen: () -> Unit,
+    setUpCurrentCityModel: () -> Unit
 ) {
     Row(
         Modifier
@@ -191,6 +192,7 @@ fun NameItem(
                 .align(Alignment.CenterVertically)
                 .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp))
                 .clickable {
+                    setUpCurrentCityModel()
                     navigateToInfoScreen()
                 }
         ) {
