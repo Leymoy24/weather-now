@@ -2,10 +2,10 @@ package com.example.weathernow.ui.screen.weather
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weathernow.api.ApiResult
+import com.example.weathernow.data.api.ApiResult
 import com.example.weathernow.data.model.CityModel
 import com.example.weathernow.data.repository.MainRepository
-import com.example.weathernow.ui.ScreenUiState
+import com.example.weathernow.ui.screen.ScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,8 +1,8 @@
 package com.example.weathernow.di
 
 import android.util.Log
-import com.example.weathernow.api.ApiService
-import com.example.weathernow.api.ApiServiceImpl
+import com.example.weathernow.data.api.ApiService
+import com.example.weathernow.data.api.ApiServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

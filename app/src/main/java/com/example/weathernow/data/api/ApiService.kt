@@ -1,6 +1,6 @@
-package com.example.weathernow.api
+package com.example.weathernow.data.api
 
-import com.example.example.WeatherSerializable
+import com.example.weathernow.data.api.serializable.weather.WeatherSerializable
 import com.example.weathernow.data.model.CityModel
 
 interface ApiService {

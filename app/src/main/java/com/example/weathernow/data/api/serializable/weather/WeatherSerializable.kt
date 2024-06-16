@@ -1,4 +1,4 @@
-package com.example.example
+package com.example.weathernow.data.api.serializable.weather
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable

@@ -1,6 +1,6 @@
 package com.example.weathernow.di
 
-import com.example.weathernow.api.ApiService
+import com.example.weathernow.data.api.ApiService
 import com.example.weathernow.data.repository.MainRepository
 import com.example.weathernow.data.repository.MainRepositoryImpl
 import com.example.weathernow.data.source.SessionStorage

@@ -1,8 +1,8 @@
-package com.example.weathernow.api
+package com.example.weathernow.data.api
 
-import com.example.example.WeatherSerializable
+import com.example.weathernow.data.api.serializable.weather.WeatherSerializable
 import com.example.weathernow.BuildConfig
-import com.example.weathernow.api.serializable.CitySerializable
+import com.example.weathernow.data.api.serializable.CitySerializable
 import com.example.weathernow.data.model.CityModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -16,9 +16,10 @@ class ApiServiceImpl(
         return try {
             val response = client.get(ApiRoutes.BASE_URL_CITIES)
 
-            when(response.status.value){
+            when (response.status.value) {
                 in 200..299 -> {
-                    ApiResult.Success(response.body<List<CitySerializable>>().map { it.convertToCityModel() })
+                    ApiResult.Success(
+                        response.body<List<CitySerializable>>().map { it.convertToCityModel() })
                 }
 
                 else -> {
@@ -41,7 +42,7 @@ class ApiServiceImpl(
                 }
             }
 
-            when(response.status.value){
+            when (response.status.value) {
                 in 200..299 -> {
                     ApiResult.Success(response.body())
                 }

@@ -1,8 +1,8 @@
 package com.example.weathernow.data.repository
 
-import com.example.example.WeatherSerializable
-import com.example.weathernow.api.ApiResult
-import com.example.weathernow.api.ApiService
+import com.example.weathernow.data.api.serializable.weather.WeatherSerializable
+import com.example.weathernow.data.api.ApiResult
+import com.example.weathernow.data.api.ApiService
 import com.example.weathernow.data.model.CityModel
 import com.example.weathernow.data.source.SessionStorage
 

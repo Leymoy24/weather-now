@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weathernow.R
-import com.example.weathernow.ui.ScreenUiState
+import com.example.weathernow.ui.screen.ScreenUiState
 
 @Composable
 fun WeatherScreen(

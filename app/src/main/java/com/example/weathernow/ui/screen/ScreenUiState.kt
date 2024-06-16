@@ -1,4 +1,4 @@
-package com.example.weathernow.ui
+package com.example.weathernow.ui.screen
 
 sealed interface ScreenUiState {
     data object Initial : ScreenUiState

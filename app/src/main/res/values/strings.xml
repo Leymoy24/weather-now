@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeatherNow</string>
+    <string name="app_name">Weather Now</string>
     <string name="error_message">Произошла ошибка</string>
     <string name="refresh">Обновить</string>
 </resources>
